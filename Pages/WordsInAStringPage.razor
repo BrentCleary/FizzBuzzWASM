@@ -1,0 +1,24 @@
+﻿@page "/wordsinastring"
+
+<PageTitle> Words In A String </PageTitle>
+<h3>Welcome to Words In A String</h3>
+
+<div class="row row-cols-1 row-cols-md-3">
+    <div class="col">
+        <div class="form-label">Fizz Value:</div>
+        <input class="form-control" @bind-value="WordString" type="text" />
+    </div>
+
+</div>
+
+<div class="row mt-5 border-top border-dark border-2 rounded">
+    <div class="col mt-4">
+        <WordsInAStringComponent WordString="@WordString"/>
+    </div>
+</div>
+
+@code {
+
+    private string WordString = "abcde";
+
+}
