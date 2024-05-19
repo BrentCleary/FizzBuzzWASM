@@ -1,26 +1,40 @@
 ﻿
 <div class="row row-cols-1 row-cols-md-3">
     <div class="col">
-        <div class="card border border-1 rounded-2 bg-secondary" style="width:150; height:300px;">
-            <div class="card-header">
 
-            </div>
+        @{
+            ListValues = GenerateListValues(StartValue, EndValue);
+            LinkedList newList = new LinkedList();
+            newList.AddToList(ListValues);
+
+            DisplayDictionary = LinkedList.GenerateNodeDictionary(newList);
+        }
+
+        <div class="card border border-1 rounded-2 bg-secondary" style="width:150; height:300px;">
+            {
+                <div class="card-header">
+
+                </div>
+            }
         </div>
     </div>
 </div>
 
 
-
 @code {
+
+    // --------------------- USER VALUES AND LIST GENERATION ------------------
 
     [Parameter]
     public int StartValue { get; set; }
-    
+
     [Parameter]
     public int EndValue {get; set; }
 
     [Parameter]
     public List<int> ListValues { get; set; }
+
+    public Dictionary<int, Node> DisplayDictionary = new Dictionary<int, Node>();
 
     public List<int> GenerateListValues(int startValue, int endValue)
     {
@@ -29,18 +43,17 @@
         if(startValue != null && endValue != null)
         {
             int valueRange = startValue - endValue;
-
             for(int i = 0; i < valueRange; i++)
             {
                 result.Add(i);
             }
         }
-
         return result;
     }
 
 
-    public LinkedList DisplayList = new LinkedList();
+
+    // --------------------- NODE AND LINKED LIST GENERATION ------------------
 
     public class Node
     {
@@ -108,7 +121,23 @@
             }
             Console.WriteLine();
         }
+ 
+        // --------------------- DICTIONARY GENERATION ------------------
 
+
+        public Dictionary<int, Node> GenerateNodeDictionary(LinkedList list)
+        {
+            Dictionary<int, Node> nodeDictionary = new Dictionary<int, Node>();
+
+            Node current = list.Head;
+            while (current != null)
+            {
+                nodeDictionary.Add(current.Data, current.Next);
+                current = current.Next;
+            }
+
+            return nodeDictionary;
+        }
 
     }
 
