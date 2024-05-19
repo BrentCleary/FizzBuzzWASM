@@ -1,29 +1,116 @@
-﻿<PageTitle> FizzBuzz </PageTitle>
-<h3>Welcome to FizzBuzz Land!</h3>
-
+﻿
 <div class="row row-cols-1 row-cols-md-3">
     <div class="col">
-        <div class="form-label">Fizz Value:</div>
-        <input class="form-control" @bind-value="FizzValue" type="number" />
-    </div>
-    <div class="col">
-        <div class="form-label">Buzz Value:</div>
-        <input class="form-control" @bind-value="BuzzValue" type="number" />
-    </div>
-    <div class="col">
-        <div class="form-label">Count:</div>
-        <input class="form-control" @bind-value="CountValue" type="number" />
+        <div class="card border border-1 rounded-2 bg-secondary" style="width:150; height:300px;">
+            <div class="card-header">
+
+            </div>
+        </div>
     </div>
 </div>
 
-<div class="row mt-5 border-top border-dark border-2 rounded">
-    <div class="col mt-4">
-        <FizzBuzzComponent FizzValue="@FizzValue" BuzzValue="BuzzValue" Count="CountValue"/>
-    </div>
-</div>
+
 
 @code {
-    private int FizzValue = 3;
-    private int BuzzValue = 5;
-    private int CountValue = 20;
+
+    [Parameter]
+    public int StartValue { get; set; }
+    
+    [Parameter]
+    public int EndValue {get; set; }
+
+    [Parameter]
+    public List<int> ListValues { get; set; }
+
+    public List<int> GenerateListValues(int startValue, int endValue)
+    {
+        List<int> result = new List<int>();
+
+        if(startValue != null && endValue != null)
+        {
+            int valueRange = startValue - endValue;
+
+            for(int i = 0; i < valueRange; i++)
+            {
+                result.Add(i);
+            }
+        }
+
+        return result;
+    }
+
+
+    public LinkedList DisplayList = new LinkedList();
+
+    public class Node
+    {
+        public int Data { get; set; }
+        public Node Next { get; set; }
+
+        public Node(int data)
+        {
+            this.Data = data;
+            this.Next = null;
+        }
+    }
+
+    public class LinkedList
+    {
+        // Generates the head Node of the Linked List
+        public Node Head { get; private set; }
+
+        // Constructor: Sets the head of the list to null
+        public LinkedList()
+        {
+            this.Head = null;
+        }
+
+        public void AddLast(int data)
+        {
+            Node newNode = new Node(data);
+
+            if (Head == null)
+            {
+                Head = newNode;
+            }
+            else
+            {
+                Node current = Head;
+                while (current.Next != null)
+                {
+                    current = current.Next;
+                }
+                current.Next = newNode;
+            }
+        }
+
+        public void AddToList(List<int> ListValues)
+        {
+            if (ListValues != null)
+            {
+                LinkedList linkedList = new LinkedList();
+
+                foreach (int value in ListValues)
+                {
+                    linkedList.AddLast(value);
+                }
+            }
+        }
+
+        // Method to print the Linked List
+        public void PrintList()
+        {
+            Node current = Head;
+            while (current != null)
+            {
+                Console.Write(current.Data + " ");
+                current = current.Next;
+            }
+            Console.WriteLine();
+        }
+
+
+    }
+
+
 }

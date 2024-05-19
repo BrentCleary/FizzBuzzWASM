@@ -1,7 +1,7 @@
 ﻿
 <div class="row row-cols-1 row-cols-md-5">
 
-    <div>Number of Permutations = @WordsInString(WordString)</div>
+    <div>Number of Words = @WordsInString(WordString)</div>
 
 </div>
 
@@ -29,17 +29,10 @@
                 result += 1;
             }
 
-            // if non-space, and bool is true, continue to next index
-            if(WordString[i] == V && currentWord == true)
-            {
-                i++;
-            }
-
             // if space, set bool false, continue
             if (WordString[i] == V)
             {
                 currentWord = false;
-                i++;
             }
 
         }
