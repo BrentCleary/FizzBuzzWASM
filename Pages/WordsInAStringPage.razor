@@ -5,13 +5,14 @@
 
 <div class="row row-cols-1 row-cols-md-3">
     <div class="col">
-        <div class="form-label">Fizz Value:</div>
+        <div class="form-label">Word String:</div>
         <input class="form-control" @bind-value="WordString" type="text" />
+        <button class="mt-3 btn btn-success" type="submit">Check Word Count</button>
     </div>
 
 </div>
 
-<div class="row mt-5 border-top border-dark border-2 rounded">
+<div class="row mt-5 border-top border-dark border-2">
     <div class="col mt-4">
         <WordsInAStringComponent WordString="@WordString"/>
     </div>

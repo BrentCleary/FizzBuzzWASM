@@ -1,11 +1,7 @@
 ﻿
 <div class="row row-cols-1 row-cols-md-5">
 
-
-
     <div>Number of Permutations = @WordsInString(WordString)</div>
-
-    <h1></h1>
 
 </div>
 
@@ -15,20 +11,37 @@
 
     public int WordsInString(string WordString)
     {
-        // set initial Variable to 1
-        int result = 1;
+        int result = 0;
+        const char V = ' ';
+        bool currentWord = false;
 
         if(WordString.Length == 0)
         {
-            result = 0;
+            return result = 0;
         }
 
-        if(WordString.Length > 0)
+        for(int i = 0; i < WordString.Length; i++)
         {
-            for(int i = 1; i <= WordString.Length; i++)
+            // if non-space, and bool is false, increase count and set bool to true
+            if(WordString[i] != V && currentWord == false)
             {
-                result = result * i;
+                currentWord = true;
+                result += 1;
             }
+
+            // if non-space, and bool is true, continue to next index
+            if(WordString[i] == V && currentWord == true)
+            {
+                i++;
+            }
+
+            // if space, set bool false, continue
+            if (WordString[i] == V)
+            {
+                currentWord = false;
+                i++;
+            }
+
         }
 
         return result;
