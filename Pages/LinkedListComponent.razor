@@ -23,21 +23,18 @@
             {          
                 @for (int i = 0; i < DisplayList.Count; i++)
                 {
-                    <div class="col g-2">
-                        <div class="card border border-2 rounded-3 bg-secondary m-3" style="width:150px; height:100px;">
+                    <div class="card border border-2 rounded-3 bg-secondary m-3" style="width:150px; height:100px;">
 
-                            <div class="card-header bg-info">Node Value is @DisplayList[i].Data</div>
-                            @if(DisplayList[i].Node == null)
-                            {
-                                <div class="card-body bg-warning">Next is Null</div>
-                            }
-                            else
-                            {
-                                <div class="card-body bg-warning">Next Node Value is @DisplayList[i].Node.Data</div>
-                            }
-                        </div>
-
-                    </div>
+                        <div class="card-header bg-info">Node Value is @DisplayList[i].Data</div>
+                        @if(DisplayList[i].Node == null)
+                        {
+                            <div class="card-body bg-warning">Next is Null</div>
+                        }
+                        else
+                        {
+                            <div class="card-body bg-warning">Next Node Value is @DisplayList[i].Node.Data</div>
+                        }
+                </div>
                 }
             }
         </div>
@@ -86,7 +83,7 @@
 
         if(startValue != null && endValue != null)
         {
-            int valueRange = endValue - startValue;
+            int valueRange = Math.Abs(endValue - startValue);
             for(int i = 0; i < valueRange; i++)
             {
                 result.Add(startValue + i);
@@ -164,21 +161,7 @@
             }
         }
 
-        // Method to print the Linked List
-        public void PrintList()
-        {
-            Node current = Head;
-            while (current != null)
-            {
-                Console.Write(current.Data + " ");
-                current = current.Next;
-            }
-            Console.WriteLine();
-        }
-
-        // --------------------- NODE-ARRAY GENERATION ------------------
-
-
+        // --------------------- NODE LIST GENERATION ------------------
         public List<DataContainer<int, Node>> GenerateNodeList()
         {
             Node current = this.Head;
