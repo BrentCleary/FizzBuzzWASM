@@ -3,21 +3,29 @@
 <PageTitle>Linked List Generator</PageTitle>
 <h3>Let's Generate Some Links</h3>
 
-<div class="row row-cols-1 row-cols-md-3">
-    <div class="col">
-        <div class="form-label">Number of Links</div>
-        <input class="form-control" type="number" />
-    </div>
-
+<div class="row row-cols-1 row-cols-md-3 m-2">
+        <div class="col">
+            <div class="form-label">Start Value</div>
+            <input class="form-control" type="number" @bind-value="StartValue"/>
+        </div>
 </div>
+<div class="row row-cols-1 row-cols-md-3 m-2">
+
+        <div class="col">
+            <div class="form-label">End Value</div>
+            <input class="form-control" type="number" @bind-value="EndValue" />
+        </div>
+</div>
+
 
 <div class="row mt-5 border-top border-dark border-2 rounded">
     <div class="col mt-4">
-        <LinkedListComponent/>
+        <LinkedListComponent StartValue="StartValue" EndValue="EndValue"/>
     </div>
 </div>
 
 @code {
 
-
+    private int StartValue { get; set; }
+    private int EndValue { get; set; }
 }
