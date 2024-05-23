@@ -5,25 +5,23 @@
         @{
             ListValues = GenerateListValues(StartValue, EndValue);
             newList.AddToList(ListValues);
+            DisplayList.Clear();
             DisplayList = newList.GenerateNodeList();
         }
-        <div class="m-3 border border-2">
-            <div class="m-1 bg-light">@StartValue</div>
-            <div class="m-1 bg-gray">@EndValue</div>
-        </div>
-        <div>
+
+        <div class="row">
             @foreach (int val in ListValues)
             {
-                <div>@val</div>
+                <div class="col-1">@val</div>
             } 
         </div>
 
-        <div class="row row-cols-1 row-cols-md-5">
+@*         <div class="row row-cols-1 row-cols-md-5">
             @if(DisplayList != null)
             {          
                 @for (int i = 0; i < DisplayList.Count; i++)
                 {
-                    <div class="card border border-2 rounded-3 bg-secondary m-3" style="width:150px; height:100px;">
+                    <div class="card border border-2 rounded-3 bg-secondary m-3">
 
                         <div class="card-header bg-info">Node Value is @DisplayList[i].Data</div>
                         @if(DisplayList[i].Node == null)
@@ -37,26 +35,25 @@
                 </div>
                 }
             }
-        </div>
+        </div> *@
 
-
-        <div>TEST DIV</div>
-
-@*         @foreach(KeyValuePair<int,Node> kvp in DisplayList)
-        {
-            <div class="card border border-2 rounded-3 bg-secondary m-3" style="width:150px; height:100px;">
+        <div class="row-cols-5">
+            @foreach(DataContainer<int,Node> container in DisplayList)
+            {
+                <div class="card border border-2 rounded-3 bg-secondary m-3 col-2" style="width:100px; height:100px;">
             
-                <div class="card-header bg-info">Node Value is @kvp.Key</div>
-                @if(kvp.Value != null)
-                {
-                    <div class="card-body bg-warning">Next Node Value is @kvp.Value.Data</div>
-                }
-                else
-                {
-                    <div class="card-body bg-warning">Next is Null</div>
-                }
-            </div>
-        } *@
+                    <div class="card-header bg-info">Node Value is @container.Data</div>
+                    @if(container.Node != null)
+                    {
+                        <div class="card-body bg-warning">Next Node Value is @container.Node</div>
+                    }
+                    else
+                    {
+                        <div class="card-body bg-warning">Next is Null</div>
+                    }
+                </div>
+            }
+        </div>
 
     </div>
 </div>
@@ -72,8 +69,10 @@
     [Parameter]
     public int EndValue {get; set; }
 
-    LinkedList newList = new LinkedList();
+    [Parameter]
     public List<int> ListValues { get; set; }
+
+    LinkedList newList = new LinkedList();
 
     List<DataContainer<int,Node>> DisplayList = new List<DataContainer<int,Node>>();
 
@@ -124,7 +123,6 @@
         // Generates the head Node of the Linked List
         public Node Head { get; private set; }
 
-
         // Constructor: Sets the head of the list to null
         public LinkedList()
         {
@@ -166,9 +164,9 @@
         {
             Node current = this.Head;
             List<DataContainer<int, Node>> NodeList = new();
+            NodeList.Clear();
             while (current != null)
             {
-
                 if(current.Next == null)
                 {
                     DataContainer<int, Node?> dataContainer = new DataContainer<int, Node?>(current.Data, null);
@@ -181,6 +179,11 @@
                     NodeList.Add(dataContainer);
                     current = current.Next;
                 }
+            }
+
+            foreach(DataContainer<int,Node> DT in NodeList)
+            {
+                Console.WriteLine(DT.Data);
             }
 
             return NodeList;
