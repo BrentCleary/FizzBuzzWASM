@@ -1,0 +1,26 @@
+﻿<h3>Last Word Length Component</h3>
+
+<div class="border border-2 rounded-2">
+    <div>
+        @{
+            if(WordString.Length == 0)
+            {
+                WordLength = 0;
+            }
+
+            for(int i = WordString.Length-1; i >= 0; i--)
+            {
+                
+            }
+        }
+    </div>
+</div>
+
+
+@code {
+
+    [Parameter]
+    public string WordString { get; set; }
+    [Parameter]
+    public int WordLength { get; set; }
+}
