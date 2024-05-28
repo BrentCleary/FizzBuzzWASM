@@ -5,11 +5,16 @@
 
 <h3>Let's Find the Length of the Last Word</h3>
 
+<input type="text" class="form-control" @bind-value="WordString" />
 
-<LastWordLengthComponent />
-
+<div class="bg-light">
+    <LastWordLengthComponent WordString="@WordString" WordLength="@WordLength"/>
+</div>
 
 @code {
 
+    public string WordString = "";
+
+    public int WordLength = 0;
 
 }
