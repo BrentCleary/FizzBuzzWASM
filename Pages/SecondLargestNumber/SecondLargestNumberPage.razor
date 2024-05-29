@@ -1,0 +1,23 @@
+﻿@* You’re given an array of numbers, and you should return the second largest number in that array. 
+
+    If the array is empty, or contains all the same numbers, return an error message / throw an exception. *@
+
+@page "/secondlargestnumber"
+
+<div class="p-2 m-2">
+    <h1>Return the Second Largest Number</h1>
+</div>
+<div>
+    <h5>You’re given an array of numbers, and you should return the second largest number in that array.</h5>
+    <h5>If the array is empty, or contains all the same numbers, return an error message / throw an exception.</h5>
+</div>
+
+<div>
+    <input type="text" class="form-control" @bind-value="NumberArray" />
+</div>
+
+<SecondLargestNumberComponent NumberArray="@NumberArray"/>
+
+@code{
+    public int[] NumberArray { get; set; } = new int[] {};
+}

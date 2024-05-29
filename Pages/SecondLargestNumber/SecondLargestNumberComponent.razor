@@ -1,0 +1,62 @@
+﻿
+<div class="bg-secondary">
+    <h3>SecondLargestNumberComponent</h3>
+
+    <div>The Second Largest Number is @SecondLargestNum(NumberArray)</div>
+</div>
+
+
+@code {
+
+    private int largestNum;
+    private int secondNum;
+
+    [Parameter]
+    public int[] NumberArray { get; set; }
+
+    [Parameter]
+    public int SecondLargestResult { get; set; }
+
+    public int SecondLargestNum(int[] array)
+    {
+        bool allSameNumbers = true;
+        int result = 0;
+
+        if(array == null || array.Length == 0)
+        {
+            throw new ArgumentException("Parameter cannot be null or empty", nameof(array));
+        }
+
+        if(array.Length == 1)
+        {
+            result = array[0];
+            allSameNumbers = false;
+        }
+
+        if(array.Length > 1)
+        {
+            largestNum = array[0];
+
+            for(int i = 1; i < array.Length; i++)
+            {
+                if(array[i] > largestNum)
+                {
+                    allSameNumbers = false;
+                    secondNum = largestNum;
+                    largestNum = array[i];
+                }
+            }
+
+            result = secondNum;
+        }
+
+        if (allSameNumbers == true)
+        {
+            throw new ArgumentException("All Numbers are equal", nameof(array));
+        }
+
+        return result;
+    }
+
+
+}
