@@ -3,12 +3,14 @@
 <PageTitle>Last Word Length</PageTitle>
 
 
-<h3>Let's Find the Length of the Last Word</h3>
+<h3>Input a Sentence Below</h3>
 
 <input type="text" class="form-control" @bind-value="WordString" />
 
-<div class="bg-light">
-    <LastWordLengthComponent WordString="@WordString" WordLength="@WordLength"/>
+<div class="border-primary border-2 bg bg-dark mt-3 p-2">
+    <div class="border-primary border-2 bg-dark">
+        <LastWordLengthComponent WordString="@WordString" WordLength="@WordLength"/>
+    </div>
 </div>
 
 @code {
