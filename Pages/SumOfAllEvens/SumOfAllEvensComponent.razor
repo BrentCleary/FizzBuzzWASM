@@ -1,0 +1,44 @@
+﻿<h3>Component</h3>
+
+@* You’re given an array of numbers, and you should return the sum of all even numbers in that array *@
+
+<div class="bg-light border-2 rounded-2">
+    <div>
+        @{
+
+            string listItem;
+            List<string> evenList;
+            
+            foreach (int number in @EvenNumberResult(NumberArray))
+            {
+                listItem = string.Join(", ", number);
+                // evenList.Add(listItem);
+            }
+        }
+
+    </div>
+</div>
+
+
+@code {
+
+    [Parameter]
+    public int[] NumberArray { get; set; }
+
+    public List<int> EvenNumberResult(int[] array)
+    {
+        List<int> result = new List<int>();
+
+        foreach(int number in array)
+        {
+            if(number % 2 == 0)
+            {
+                result.Add(number);
+            }
+        }
+
+        return result;
+    }
+
+
+}

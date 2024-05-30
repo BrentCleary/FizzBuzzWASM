@@ -1,0 +1,14 @@
+﻿@page "/sumofallevens"
+
+<div class="bg-light">
+    <input type="text" class="form-control" @bind-value="NumberArray" />
+</div>
+
+<SumOfAllEvensComponent NumberArray="@NumberArray"></SumOfAllEvensComponent>
+
+
+@code {
+
+    public int[] NumberArray { get; set; } = new int[] { 1, 2, 3, 4, 5, 6, 7, 8 };
+
+}
