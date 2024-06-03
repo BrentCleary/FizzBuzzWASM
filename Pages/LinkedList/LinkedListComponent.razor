@@ -2,42 +2,23 @@
 <div class="row row-cols-1 row-cols-md-3">
     <div class="col">
 
-        @{
-            ListValues = GenerateListValues(StartValue, EndValue);
-            newList.AddToList(ListValues);
-            DisplayList.Clear();
-            DisplayList = newList.GenerateNodeList();
-        }
+        <div>
+            <h1>@StartValue</h1>
+        </div>
+        
+        <div>
+            <h1>@EndValue</h1>
+        </div>
 
         <div class="row">
             @foreach (int val in ListValues)
             {
-                <div class="col-1">@val</div>
+                <div class="col-2">@val</div>
             } 
         </div>
 
-@*         <div class="row row-cols-1 row-cols-md-5">
-            @if(DisplayList != null)
-            {          
-                @for (int i = 0; i < DisplayList.Count; i++)
-                {
-                    <div class="card border border-2 rounded-3 bg-secondary m-3">
 
-                        <div class="card-header bg-info">Node Value is @DisplayList[i].Data</div>
-                        @if(DisplayList[i].Node == null)
-                        {
-                            <div class="card-body bg-warning">Next is Null</div>
-                        }
-                        else
-                        {
-                            <div class="card-body bg-warning">Next Node Value is @DisplayList[i].Node.Data</div>
-                        }
-                </div>
-                }
-            }
-        </div> *@
-
-        <div class="row-cols-5">
+        <div class="row">
             @foreach(DataContainer<int,Node> container in DisplayList)
             {
                 <div class="card border border-2 rounded-3 bg-secondary m-3 col-2" style="width:100px; height:100px;">
@@ -65,10 +46,8 @@
 
     [Parameter]
     public int StartValue { get; set; }
-
     [Parameter]
     public int EndValue {get; set; }
-
     [Parameter]
     public List<int> ListValues { get; set; }
 
@@ -79,13 +58,26 @@
     public List<int> GenerateListValues(int startValue, int endValue)
     {
         List<int> result = new List<int>();
+        DisplayList.Clear();
 
-        if(startValue != null && endValue != null)
+        if (startValue != null && endValue != null)
         {
             int valueRange = Math.Abs(endValue - startValue);
-            for(int i = 0; i < valueRange; i++)
+
+            if (startValue <= endValue)
             {
-                result.Add(startValue + i);
+                for (int i = 0; i < valueRange; i++)
+                {
+                    result.Add(startValue + i);
+                }
+            }
+
+            if (endValue <= startValue)
+            {
+                for (int i = 0; i < valueRange; i--)
+                {
+                    result.Add(startValue + i);
+                }
             }
         }
         return result;
@@ -164,7 +156,6 @@
         {
             Node current = this.Head;
             List<DataContainer<int, Node>> NodeList = new();
-            NodeList.Clear();
             while (current != null)
             {
                 if(current.Next == null)

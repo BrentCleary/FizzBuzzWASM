@@ -8,8 +8,6 @@
             <div class="form-label">Start Value</div>
             <input class="form-control" type="number" @bind-value="StartValue"/>
         </div>
-</div>
-<div class="row row-cols-1 row-cols-md-3 m-2">
 
         <div class="col">
             <div class="form-label">End Value</div>
@@ -20,28 +18,12 @@
 
 <div class="row mt-5 border-top border-dark border-2 rounded">
     <div class="col mt-4">
-        <LinkedListComponent StartValue="StartValue" EndValue="EndValue" ListValues="@GenerateListValues(StartValue, EndValue)"/>
+        <LinkedListComponent StartValue="StartValue" EndValue="EndValue"/>
     </div>
 </div>
 
 @code {
+    private int StartValue { get; set; } = 0;
+    private int EndValue { get; set; } = 0;
 
-    private int StartValue { get; set; }
-    private int EndValue { get; set; }
-    private List<int> ListValues { get; set; }
-
-    public List<int> GenerateListValues(int startValue, int endValue)
-    {
-        List<int> result = new List<int>();
-
-        if (startValue != null && endValue != null)
-        {
-            int valueRange = Math.Abs(endValue - startValue);
-            for (int i = 0; i < valueRange; i++)
-            {
-                result.Add(startValue + i);
-            }
-        }
-        return result;
-    }
 }
